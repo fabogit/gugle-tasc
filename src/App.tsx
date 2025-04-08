@@ -98,6 +98,33 @@ function App() {
   };
 
   /**
+   * Updates the text of a task identified by its ID.
+   * Creates a new array with the updated task. Does nothing if the new text is empty.
+   * @param {string} id - The ID of the task to edit.
+   * @param {string} newText - The new text content for the task.
+   * @ JSDoc for handleEditTask
+   */
+  const handleEditTask = (id: string, newText: string) => {
+    const trimmedText = newText.trim();
+    if (!trimmedText) {
+      console.warn(
+        "Attempted to save empty task text from App component. Ignoring."
+      );
+      return; // Do not save empty text at the App level either
+    }
+
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id ? { ...task, text: trimmedText } : task
+      )
+    );
+    // Explanation: Similar to toggleComplete, we map over the tasks.
+    // If the task ID matches, we create a new task object using spread (...)
+    // and override the 'text' property with the new trimmed text.
+    // Otherwise, we return the original task. This ensures immutability.
+  };
+
+  /**
    * Removes a task identified by its ID from the tasks state array.
    * Creates a new array excluding the deleted task.
    * @param {string} id - The ID of the task to delete.
@@ -105,6 +132,7 @@ function App() {
   const handleDeleteTask = (id: string) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
+
   // --- End Handlers ---
 
   // --- JSX Rendering ---
@@ -145,6 +173,7 @@ function App() {
             tasks={tasks}
             onToggleComplete={handleToggleComplete}
             onDeleteTask={handleDeleteTask}
+            onEditTask={handleEditTask}
           />
         )}
       </div>

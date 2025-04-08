@@ -159,3 +159,68 @@ h2 {
   color: var(--text-muted-color);
   padding: 1rem;
 }
+
+.task-item.editing {
+  /* Highlight item being edited */
+  background-color: var(--hover-bg-color);
+}
+
+.edit-container {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  margin: 0 0.5rem;
+}
+
+.edit-input {
+  flex-grow: 1;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--input-border-color);
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+
+.task-text {
+  flex-grow: 1;
+  margin: 0 1rem;
+  font-size: 1rem;
+  color: var(--text-color);
+  transition: color 0.2s ease;
+  /* Indicate double-click possibility */
+  cursor: pointer;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.edit-task-button {
+  background-color: var(--button-primary-bg);
+  opacity: 0.7;
+  color: var(--button-primary-text);
+  border: none;
+  border-radius: 4px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.edit-task-button:hover {
+  opacity: 1;
+}
+
+.edit-task-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.task-item.completed .edit-task-button {
+  /* Hide edit button for completed tasks? Or just disable it. */
+  display: none;
+}

@@ -8,19 +8,26 @@ import TaskItem from "./TaskItem";
  */
 interface TaskListProps {
   /**
-   * @property {Task[]} tasks - An array of task objects to display.
+   * @property tasks - An array of task objects to display.
    */
   tasks: Task[];
   /**
-   * @property {(id: string) => void} onToggleComplete - Callback function passed down to TaskItem for toggling completion.
-   * @param {string} id - The ID of the task to toggle.
+   * @property onToggleComplete - Callback function passed down to TaskItem for toggling completion.
+   * @param id - The ID of the task to toggle.
    */
   onToggleComplete: (id: string) => void;
   /**
-   * @property {(id: string) => void} onDeleteTask - Callback function passed down to TaskItem for deleting a task.
-   * @param {string} id - The ID of the task to delete.
+   * @property onDeleteTask - Callback function passed down to TaskItem for deleting a task.
+   * @param id - The ID of the task to delete.
    */
   onDeleteTask: (id: string) => void;
+  /**
+   *
+   * @property onEditTask - Callback function passed down to TaskItem for editing a task.
+   * @param id  - The ID of the task to edit.
+   * @param newText - The updated task text
+   */
+  onEditTask: (id: string, newText: string) => void;
 }
 
 /**
@@ -33,6 +40,7 @@ const TaskList: React.FC<TaskListProps> = ({
   tasks,
   onToggleComplete,
   onDeleteTask,
+  onEditTask,
 }) => {
   return (
     <ul className="task-list">
@@ -44,6 +52,7 @@ const TaskList: React.FC<TaskListProps> = ({
           // Pass down the handlers
           onToggleComplete={onToggleComplete}
           onDeleteTask={onDeleteTask}
+          onEditTask={onEditTask}
         />
       ))}
     </ul>
